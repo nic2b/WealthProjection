@@ -66,5 +66,6 @@ struct AccountView: View {
                 Alert(title: Text("Information"), message: Text("Changes Successful"), dismissButton: .default(Text("Coolio!")))
             }
         }
+        // Random change - Sam Github Update
     }
 }
