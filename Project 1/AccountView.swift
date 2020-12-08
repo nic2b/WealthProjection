@@ -21,6 +21,28 @@ struct AccountView: View {
     @State var showingAlert = false
     
     var body: some View {
+        BasicAccountInformation()
+    }
+    
+    func SaveSettings() {
+        if username != "..." {
+            userInfo.username = username
+        }
+        if firstName != "..." {
+            userInfo.firstName = firstName
+        }
+        if lastName != "..." {
+            userInfo.lastName = lastName
+        }
+        if email != "..." {
+            userInfo.email = email
+        }
+        userInfo.dateOfBirth = birthDate
+        
+        self.showingAlert = true
+    }
+    
+    func BasicAccountInformation() -> some View {
         VStack {
             HStack {
                 Text("Username: ")
@@ -40,32 +62,15 @@ struct AccountView: View {
             }
             HStack {
                 DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
-                    Text("Enter birthdate: ")
+                    Text("Birthdate: ")
                 }
             }.padding(.all)
             
-            Button(action: {
-                if username != "..." {
-                    userInfo.username = username
-                }
-                if firstName != "..." {
-                    userInfo.firstName = firstName
-                }
-                if lastName != "..." {
-                    userInfo.lastName = lastName
-                }
-                if email != "..." {
-                    userInfo.email = email
-                }
-                userInfo.dateOfBirth = birthDate
-                
-                self.showingAlert = true
-            }) {
+            Button(action: SaveSettings) {
                 Text("Save Changes")
             }.alert(isPresented: $showingAlert) {
                 Alert(title: Text("Information"), message: Text("Changes Successful"), dismissButton: .default(Text("Coolio!")))
             }
         }
-        // Random change - Sam Github Update
     }
 }
